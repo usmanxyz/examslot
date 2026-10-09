@@ -102,3 +102,110 @@
     scroll-behavior: auto !important;
   }
 }
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 16mm;
+  }
+
+  :root,
+  [data-theme="dark"] {
+    --canvas: #FFFFFF;
+    --surface: #FFFFFF;
+    --sunken: #FFFFFF;
+    --text: #000000;
+    --muted: #333333;
+    --border: #000000;
+    color-scheme: light;
+  }
+
+  body {
+    background: #FFFFFF;
+    color: #000000;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-sheet {
+    max-width: none;
+    padding: 0;
+  }
+
+  .print-brand {
+    font-size: 9pt;
+    color: #333333;
+  }
+
+  .print-title {
+    font-family: "Source Serif 4 Variable", Georgia, serif;
+    font-size: 20pt;
+    font-weight: 600;
+  }
+
+  .print-details {
+    font-size: 10pt;
+  }
+
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+  }
+
+  .print-table th,
+  .print-table td {
+    border: 1pt solid #000000;
+    padding: 6pt 8pt;
+    text-align: left;
+  }
+
+  .print-table thead {
+    display: table-header-group;
+  }
+
+  .print-table tr {
+    break-inside: avoid;
+  }
+
+  .print-footer {
+    font-size: 9pt;
+    color: #333333;
+  }
+}
+
+.print-only {
+  display: none;
+}
