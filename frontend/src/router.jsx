@@ -1,9 +1,11 @@
 import { Navigate } from 'react-router'
 
+import AdminLayout from './components/layout/AdminLayout'
 import PublicLayout from './components/layout/PublicLayout'
 import RootProviders from './components/layout/RootProviders'
 import StudentLayout from './components/layout/StudentLayout'
 import RedirectIfSignedIn from './guards/RedirectIfSignedIn'
+import RequireAdmin from './guards/RequireAdmin'
 import RequireStudent from './guards/RequireStudent'
 import StudentFlowGate from './guards/StudentFlowGate'
 
@@ -27,6 +29,17 @@ export const routes = [
           { path: 'admin/login', lazy: page(() => import('./pages/public/AdminLoginPage')) },
           { path: 'set-password', lazy: page(() => import('./pages/public/SetPasswordPage')) },
           { path: '*', lazy: page(() => import('./pages/public/NotFoundPage')) },
+        ],
+      },
+      {
+        Component: RequireAdmin,
+        children: [
+          {
+            Component: AdminLayout,
+            children: [
+              { path: 'admin', lazy: page(() => import('./pages/admin/AdminDashboardPage')) },
+            ],
+          },
         ],
       },
       {
