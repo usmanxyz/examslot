@@ -38,10 +38,10 @@ export default function PrivacyPage() {
     <LegalPage title="Privacy Policy" updated="9 October 2026">
       <Section heading="Who we are">
         <Paragraph>
-          ExamSlot is a demonstration exam date sheet system built and operated by Usman Ali in Pakistan for the
+          ExamSlot is a demonstration exam date sheet system built and operated by Sajjad and team in Pakistan for the
           Loopverse 3.0 hackathon. You can reach us at{' '}
-          <a href="mailto:theusmanasghar@gmail.com" className="text-primary">
-            theusmanasghar@gmail.com
+          <a href="mailto:f2024266406@umt.edu.pk" className="text-primary">
+            f2024266406@umt.edu.pk
           </a>
           .
         </Paragraph>
@@ -105,7 +105,7 @@ export default function PrivacyPage() {
         <Paragraph>
           You can see your own details after signing in. To correct details, ask the exam office (the administrator).
           To have your information deleted before the demonstration ends, or to ask what we hold about you, email
-          theusmanasghar@gmail.com from the address on the account.
+          f2024266406@umt.edu.pk from the address on the account.
         </Paragraph>
       </Section>
 

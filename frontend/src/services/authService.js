@@ -6,6 +6,14 @@ export function studentLogout(api) {
   return api.post('/auth/student/logout')
 }
 
+export function adminLogin(api, body) {
+  return api.post('/auth/admin/login', { ...body, website: '' })
+}
+
+export function adminLogout(api) {
+  return api.post('/auth/admin/logout')
+}
+
 export function forgotPassword(api, email) {
   return api.post('/auth/password/forgot', { email, website: '' })
 }

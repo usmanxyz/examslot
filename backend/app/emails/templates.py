@@ -7,7 +7,7 @@ SETUP_SUBJECT = "Set your ExamSlot password"
 RESET_SUBJECT = "Reset your ExamSlot password"
 FOOTER = (
     "ExamSlot\n"
-    "A demonstration built for Loopverse 3.0. Replies go to theusmanasghar@gmail.com."
+    "A demonstration built for Loopverse 3.0. Replies go to f2024266406@umt.edu.pk."
 )
 
 SETUP_BODY = """Hello {full_name},

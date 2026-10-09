@@ -6,7 +6,7 @@ export default function TermsPage() {
       <Section heading="1. About these terms">
         <Paragraph>
           These terms apply to ExamSlot, a web application for planning exam date sheets. ExamSlot was built and is
-          operated by Usman Ali in Pakistan for the Loopverse 3.0 hackathon. By using ExamSlot you agree to these
+          operated by Sajjad and team in Pakistan for the Loopverse 3.0 hackathon. By using ExamSlot you agree to these
           terms. If you do not agree, please do not use it.
         </Paragraph>
       </Section>
@@ -88,8 +88,8 @@ export default function TermsPage() {
       <Section heading="12. Contact">
         <Paragraph>
           Questions about these terms:{' '}
-          <a href="mailto:theusmanasghar@gmail.com" className="text-primary">
-            theusmanasghar@gmail.com
+          <a href="mailto:f2024266406@umt.edu.pk" className="text-primary">
+            f2024266406@umt.edu.pk
           </a>
           .
         </Paragraph>

@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     EMAIL_BACKEND: Literal["resend", "memory"] = "memory"
     RESEND_API_KEY: str = ""
     EMAIL_FROM: str = "ExamSlot <no-reply@mail.solvirapk.com>"
-    EMAIL_REPLY_TO: str = "theusmanasghar@gmail.com"
+    EMAIL_REPLY_TO: str = "f2024266406@umt.edu.pk"
     EMAIL_HOURLY_CAP: int = 30
     EMAIL_DAILY_CAP: int = 90
     EMAIL_RECIPIENT_ALLOWLIST: str = ""

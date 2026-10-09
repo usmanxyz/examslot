@@ -1,10 +1,10 @@
 import LegalPage, { List, Paragraph, Section } from '../../components/layout/LegalPage'
 
-const EMAIL = 'theusmanasghar@gmail.com'
+const EMAIL = 'f2024266406@umt.edu.pk'
 
 export default function ContactPage() {
   return (
-    <LegalPage title="Contact" updated="9 October 2026" intro="ExamSlot is run by Usman Ali.">
+    <LegalPage title="Contact" updated="9 October 2026" intro="ExamSlot is run by Sajjad Zaidi">
       <Section heading="Email">
         <Paragraph>
           <a href={`mailto:${EMAIL}`} className="text-primary">

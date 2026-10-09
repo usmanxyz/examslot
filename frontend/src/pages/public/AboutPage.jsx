@@ -28,7 +28,7 @@ export default function AboutPage() {
 
       <Section heading="Credits">
         <Paragraph>ExamSlot is a demonstration with invented data.</Paragraph>
-        <Paragraph>Built by Usman Ali for Loopverse 3.0.</Paragraph>
+        <Paragraph>Built by Sajjad and team for Loopverse 3.0.</Paragraph>
         <List
           items={[
             'Fonts: Source Serif 4 and Public Sans, under the SIL Open Font License 1.1.',

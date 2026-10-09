@@ -10,8 +10,10 @@ export default function ConfirmDialog({
   confirmLabel,
   cancelLabel = 'Cancel',
   confirmVariant = 'primary',
+  confirmDisabled = false,
   pending = false,
   pendingLabel,
+  children,
 }) {
   return (
     <Dialog
@@ -24,11 +26,19 @@ export default function ConfirmDialog({
           <Button variant="secondary" onClick={onClose}>
             {cancelLabel}
           </Button>
-          <Button variant={confirmVariant} onClick={onConfirm} pending={pending} pendingLabel={pendingLabel}>
+          <Button
+            variant={confirmVariant}
+            onClick={onConfirm}
+            disabled={confirmDisabled}
+            pending={pending}
+            pendingLabel={pendingLabel}
+          >
             {confirmLabel}
           </Button>
         </>
       }
-    />
+    >
+      {children ? <div className="mt-4">{children}</div> : null}
+    </Dialog>
   )
 }
