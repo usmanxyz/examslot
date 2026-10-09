@@ -1,6 +1,7 @@
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, time, timedelta
 from decimal import Decimal
 
+from sqlalchemy.dialects.postgresql import Range
 from sqlalchemy.orm import Session
 
 from app.core.passwords import PasswordService
@@ -8,6 +9,8 @@ from app.models.admin import Admin
 from app.models.branch import Branch
 from app.models.course import Course
 from app.models.course_assignment import CourseAssignment
+from app.models.date_sheet_entry import DateSheetEntry
+from app.models.exam_slot import ExamSlot
 from app.models.student import Student
 
 STUDENT_PASSWORD = "a-long-student-password"
@@ -135,3 +138,42 @@ def assign_courses(session: Session, student: Student, courses: list[Course]) ->
     for course in courses:
         session.add(CourseAssignment(student_id=student.id, course_id=course.id))
     session.commit()
+
+
+def create_slot(
+    session: Session,
+    course: Course,
+    days_ahead: int = 10,
+    start: time = time(9, 0),
+    hours: int = 3,
+    seats_per_branch: int = 40,
+    end_time_set: bool = True,
+) -> ExamSlot:
+    starts_at = datetime.combine(
+        datetime.now(UTC).date() + timedelta(days=days_ahead), start, tzinfo=UTC
+    )
+    slot = ExamSlot(
+        course_id=course.id,
+        starts_at=starts_at,
+        ends_at=starts_at + timedelta(hours=hours),
+        end_time_set=end_time_set,
+        seats_per_branch=seats_per_branch,
+    )
+    session.add(slot)
+    session.commit()
+    return slot
+
+
+def create_entry(
+    session: Session, student: Student, course: Course, slot: ExamSlot
+) -> DateSheetEntry:
+    entry = DateSheetEntry(
+        student_id=student.id,
+        course_id=course.id,
+        slot_id=slot.id,
+        branch_id=student.branch_id,
+        period=Range(slot.starts_at, slot.ends_at, bounds="[)"),
+    )
+    session.add(entry)
+    session.commit()
+    return entry
