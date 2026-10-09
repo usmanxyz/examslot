@@ -95,6 +95,10 @@ class NotFound(AppError):
     status_code = 404
 
 
+class MethodNotAllowed(AppError):
+    status_code = 405
+
+
 class Conflict(AppError):
     status_code = 409
 
@@ -164,7 +168,7 @@ def _handle_validation_error(request: Request, error: Exception) -> JSONResponse
 
 def _handle_http_exception(request: Request, error: Exception) -> JSONResponse:
     if error.status_code == 405:
-        return error_response(AppError("METHOD_NOT_ALLOWED"))
+        return error_response(MethodNotAllowed("METHOD_NOT_ALLOWED"))
     if error.status_code == 404:
         return error_response(NotFound("NOT_FOUND"))
     return error_response(AppError("INTERNAL_ERROR"))

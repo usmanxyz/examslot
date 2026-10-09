@@ -1,5 +1,5 @@
 import os
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 
 import pytest
 from alembic import command
@@ -75,15 +75,46 @@ def passwords() -> PasswordService:
 
 @pytest.fixture
 def settings(database_url: str) -> Settings:
-    return Settings(APP_ENV="test", DATABASE_URL=database_url)
+    return Settings(
+        APP_ENV="test",
+        DATABASE_URL=database_url,
+        EMAIL_BACKEND="memory",
+        LOGIN_LOCK_MINUTES=15,
+    )
 
 
 @pytest.fixture
-def app(settings: Settings, engine: Engine):
-    return create_app(settings)
+def build_client(engine: Engine) -> Iterator[Callable[[Settings], TestClient]]:
+    started: list[TestClient] = []
+
+    def build(settings: Settings) -> TestClient:
+        client = TestClient(create_app(settings))
+        client.__enter__()
+        started.append(client)
+        return client
+
+    yield build
+    for client in reversed(started):
+        client.__exit__(None, None, None)
 
 
 @pytest.fixture
-def client(app) -> Iterator[TestClient]:
-    with TestClient(app) as test_client:
-        yield test_client
+def client(settings: Settings, build_client) -> TestClient:
+    return build_client(settings)
+
+
+@pytest.fixture
+def emails(client: TestClient) -> list:
+    return client.app.state.email_sender.messages
+
+
+@pytest.fixture
+def production_settings(database_url: str) -> Settings:
+    return Settings(
+        APP_ENV="production",
+        DATABASE_URL=database_url,
+        FRONTEND_ORIGIN="https://examslot.vercel.app",
+        JWT_SECRET="p" * 48,
+        EMAIL_BACKEND="resend",
+        RESEND_API_KEY="re_test_key_not_real",
+    )
