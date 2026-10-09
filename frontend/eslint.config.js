@@ -18,4 +18,8 @@ export default defineConfig([
       },
     },
   },
+  {
+    files: ['src/context/*.jsx', 'src/guards/StudentFlowGate.jsx'],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
 ])

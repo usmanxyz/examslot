@@ -1,9 +1,10 @@
-import Wordmark from './components/ui/Wordmark'
+import { useMemo } from 'react'
+import { RouterProvider, createBrowserRouter } from 'react-router'
+
+import { routes } from './router'
 
 export default function App() {
-  return (
-    <div className="flex min-h-dvh items-center justify-center p-6">
-      <Wordmark />
-    </div>
-  )
+  const router = useMemo(() => createBrowserRouter(routes), [])
+
+  return <RouterProvider router={router} />
 }
