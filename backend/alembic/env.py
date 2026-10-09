@@ -1,7 +1,7 @@
+from alembic import context
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy import create_engine, pool
 
-from alembic import context
 from app.db.base import Base
 from app.models.admin import Admin  # noqa: F401
 from app.models.branch import Branch  # noqa: F401

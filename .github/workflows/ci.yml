@@ -10,6 +10,27 @@ jobs:
     defaults:
       run:
         working-directory: backend
+    services:
+      db:
+        image: postgres:16
+        env:
+          POSTGRES_USER: examslot_owner
+          POSTGRES_PASSWORD: local-owner-password
+          POSTGRES_DB: examslot_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U examslot_owner -d examslot_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      MIGRATION_DATABASE_URL: postgresql+psycopg://examslot_owner:local-owner-password@localhost:5432/examslot_test
+      TEST_DATABASE_URL: postgresql+psycopg://examslot_owner:local-owner-password@localhost:5432/examslot_test
+      SEED_INBOX: ci-inbox@example.com
+      SEED_ADMIN_EMAIL: ci-inbox+admin@example.com
+      SEED_ADMIN_PASSWORD: a-long-ci-admin-password
+      SEED_STUDENT_PASSWORD: a-long-ci-student-password
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -19,6 +40,8 @@ jobs:
           cache-dependency-path: backend/requirements-dev.txt
       - run: pip install -r requirements-dev.txt
       - run: ruff check .
+      - run: alembic upgrade head
+      - run: alembic check
       - run: pytest
 
   frontend:
