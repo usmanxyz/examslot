@@ -12,6 +12,7 @@ from app.models.course_assignment import CourseAssignment
 from app.models.date_sheet_entry import DateSheetEntry
 from app.models.exam_slot import ExamSlot
 from app.models.student import Student
+from app.utils.timeutil import to_utc
 
 STUDENT_PASSWORD = "a-long-student-password"
 ADMIN_PASSWORD = "a-long-admin-password"
@@ -149,8 +150,8 @@ def create_slot(
     seats_per_branch: int = 40,
     end_time_set: bool = True,
 ) -> ExamSlot:
-    starts_at = datetime.combine(
-        datetime.now(UTC).date() + timedelta(days=days_ahead), start, tzinfo=UTC
+    starts_at = to_utc(
+        datetime.now(UTC).date() + timedelta(days=days_ahead), start, "Asia/Karachi"
     )
     slot = ExamSlot(
         course_id=course.id,

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Query, Response, status
 
 from app.api.deps import EmailGateDep, PasswordsDep, SessionDep, SettingsDep
 from app.schemas.common import Page
+from app.schemas.planner import DateSheetOut
 from app.schemas.student import (
     SetupLinkOut,
     StudentCreate,
@@ -13,7 +14,7 @@ from app.schemas.student import (
     StudentListQuery,
     StudentUpdate,
 )
-from app.services import student_service
+from app.services import date_sheet_service, student_service
 
 router = APIRouter(prefix="/students", tags=["admin"])
 
@@ -81,3 +82,11 @@ def resend_setup_email(
     return SetupLinkOut(
         **student_service.resend_setup_email(db, passwords, settings, gate, student_id)
     )
+
+
+@router.get("/{student_id}/date-sheet", response_model=DateSheetOut)
+def read_student_date_sheet(
+    student_id: uuid.UUID, db: SessionDep, settings: SettingsDep
+) -> DateSheetOut:
+    student_service.read_student(db, student_id)
+    return DateSheetOut(**date_sheet_service.read_date_sheet(db, settings, student_id))

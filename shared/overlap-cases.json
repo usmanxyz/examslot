@@ -1,0 +1,83 @@
+{
+  "default_exam_minutes": 180,
+  "cases": [
+    {
+      "name": "identical ranges overlap",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "second": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "overlaps": true
+    },
+    {
+      "name": "partial overlap at the start",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "second": { "start": "2026-10-27T08:00", "end": "2026-10-27T10:00" },
+      "overlaps": true
+    },
+    {
+      "name": "partial overlap at the end",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "second": { "start": "2026-10-27T11:00", "end": "2026-10-27T13:00" },
+      "overlaps": true
+    },
+    {
+      "name": "second contained in first",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T13:00" },
+      "second": { "start": "2026-10-27T10:00", "end": "2026-10-27T11:00" },
+      "overlaps": true
+    },
+    {
+      "name": "first contained in second",
+      "first": { "start": "2026-10-27T10:00", "end": "2026-10-27T11:00" },
+      "second": { "start": "2026-10-27T09:00", "end": "2026-10-27T13:00" },
+      "overlaps": true
+    },
+    {
+      "name": "first end touches second start",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "second": { "start": "2026-10-27T12:00", "end": "2026-10-27T15:00" },
+      "overlaps": false
+    },
+    {
+      "name": "first start touches second end",
+      "first": { "start": "2026-10-27T12:00", "end": "2026-10-27T15:00" },
+      "second": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "overlaps": false
+    },
+    {
+      "name": "one minute apart",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "second": { "start": "2026-10-27T12:01", "end": "2026-10-27T15:00" },
+      "overlaps": false
+    },
+    {
+      "name": "one minute of overlap",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "second": { "start": "2026-10-27T11:59", "end": "2026-10-27T15:00" },
+      "overlaps": true
+    },
+    {
+      "name": "different days",
+      "first": { "start": "2026-10-27T09:00", "end": "2026-10-27T12:00" },
+      "second": { "start": "2026-10-28T09:00", "end": "2026-10-28T12:00" },
+      "overlaps": false
+    },
+    {
+      "name": "slot without end time overlaps using the default length",
+      "first": { "start": "2026-10-27T09:00", "end": null },
+      "second": { "start": "2026-10-27T11:00", "end": "2026-10-27T13:00" },
+      "overlaps": true
+    },
+    {
+      "name": "slot without end time ends before the next start",
+      "first": { "start": "2026-10-27T09:00", "end": null },
+      "second": { "start": "2026-10-27T12:00", "end": "2026-10-27T15:00" },
+      "overlaps": false
+    },
+    {
+      "name": "two slots without end times overlap",
+      "first": { "start": "2026-10-27T09:00", "end": null },
+      "second": { "start": "2026-10-27T10:30", "end": null },
+      "overlaps": true
+    }
+  ]
+}
