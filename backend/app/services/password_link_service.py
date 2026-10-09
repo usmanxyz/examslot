@@ -25,15 +25,7 @@ def issue(
     purpose: str,
 ) -> tuple[uuid.UUID, str, datetime]:
     now = datetime.now(UTC)
-    session.execute(
-        update(PasswordToken)
-        .where(
-            PasswordToken.student_id == student.id,
-            PasswordToken.used_at.is_(None),
-            PasswordToken.revoked_at.is_(None),
-        )
-        .values(revoked_at=now)
-    )
+    revoke_live(session, student.id)
     secret = secrets.token_urlsafe(SECRET_BYTES)
     expires_at = now + _lifetime(settings, purpose)
     token = PasswordToken(
@@ -45,6 +37,18 @@ def issue(
     session.add(token)
     session.flush()
     return token.id, secret, expires_at
+
+
+def revoke_live(session: Session, student_id: uuid.UUID) -> None:
+    session.execute(
+        update(PasswordToken)
+        .where(
+            PasswordToken.student_id == student_id,
+            PasswordToken.used_at.is_(None),
+            PasswordToken.revoked_at.is_(None),
+        )
+        .values(revoked_at=datetime.now(UTC))
+    )
 
 
 def build_link(settings: Settings, token_id: uuid.UUID, secret: str) -> str:

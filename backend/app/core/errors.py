@@ -28,6 +28,32 @@ MESSAGES = {
         " and it cannot be deleted."
     ),
     "SLOT_DUPLICATE": "This course already has a slot starting at that date and time.",
+    "SLOT_SEATS_BELOW_TAKEN": "Seats cannot go below the number already taken at a branch.",
+    "COURSE_INACTIVE": "Inactive courses cannot be assigned or scheduled.",
+    "ASSIGNMENT_LOCKED": (
+        "This student has saved a date sheet. Courses can change only after you approve"
+        " their date sheet change request."
+    ),
+    "PASSWORD_ALREADY_SET": "This student has already set a password.",
+    "STUDENT_INACTIVE": "This student is inactive. Reactivate them first.",
+    "BRANCH_ALREADY_SELECTED": (
+        "Your exam branch is already set. To change it, send a request from Need help."
+    ),
+    "BRANCH_UNAVAILABLE": "This branch is not available for your exam times. Choose another branch.",
+    "BRANCH_NOT_SELECTED": "Choose your exam branch first.",
+    "ASSIGNMENT_INCOMPLETE": "Your courses have not been assigned yet.",
+    "DATE_SHEET_LOCKED": (
+        "Your date sheet is already saved. To change it, send a request from Need help."
+    ),
+    "DATE_SHEET_NOT_SAVED": "You have not saved a date sheet yet.",
+    "SLOT_UNAVAILABLE": (
+        "One of your chosen times is no longer available. Review your choices and try again."
+    ),
+    "REQUEST_ALREADY_DECIDED": "This request has already been decided.",
+    "DATE_SHEET_INCOMPLETE": "Choose a time for every course before saving.",
+    "SLOT_IN_PAST": "Choose a date and time in the future.",
+    "END_BEFORE_START": "End time must be after the start time.",
+    "CONFIRMATION_MISMATCH": "Type the registration number exactly to confirm.",
     "SLOT_CONFLICT": "Two of your exams overlap. Choose a different time for one of them.",
     "REQUEST_PENDING_EXISTS": "You already have a pending request of this type.",
     "REOPENING_OPEN": "Your earlier request was approved and is waiting to be used.",
