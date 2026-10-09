@@ -2,6 +2,7 @@ import { Outlet } from 'react-router'
 
 import ServerWakeNotice from '../ui/ServerWakeNotice'
 import Toaster from '../ui/Toaster'
+import { AdminAuthProvider } from '../../context/AdminAuthContext'
 import { ServerStatusProvider } from '../../context/ServerStatusContext'
 import { StudentAuthProvider } from '../../context/StudentAuthContext'
 import { ThemeProvider } from '../../context/ThemeContext'
@@ -13,9 +14,11 @@ export default function RootProviders() {
       <ToastProvider>
         <ServerStatusProvider>
           <StudentAuthProvider>
-            <ServerWakeNotice />
-            <Outlet />
-            <Toaster />
+            <AdminAuthProvider>
+              <ServerWakeNotice />
+              <Outlet />
+              <Toaster />
+            </AdminAuthProvider>
           </StudentAuthProvider>
         </ServerStatusProvider>
       </ToastProvider>

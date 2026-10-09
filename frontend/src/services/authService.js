@@ -17,3 +17,11 @@ export function verifyLink(api, token, signal) {
 export function setPassword(api, token, password) {
   return api.post('/auth/password/set', { token, password, website: '' })
 }
+
+export function adminLogin(api, body) {
+  return api.post('/auth/admin/login', { ...body, website: '' })
+}
+
+export function adminLogout(api) {
+  return api.post('/auth/admin/logout')
+}

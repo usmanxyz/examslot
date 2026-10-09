@@ -25,6 +25,7 @@ export function removeStored(storage, key) {
 
 export const THEME_KEY = 'examslot.theme'
 export const STUDENT_SESSION_KEY = 'examslot.student'
+export const ADMIN_SESSION_KEY = 'examslot.admin'
 export const PLANNER_DRAFT_KEY = 'examslot.plannerDraft'
 
 export function readStoredText(storage, key) {
