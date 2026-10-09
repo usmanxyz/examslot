@@ -37,6 +37,7 @@ export const routes = [
               {
                 Component: StudentFlowGate,
                 children: [
+                  { path: 'student', lazy: page(() => import('./pages/student/DashboardPage')) },
                   { path: 'student/branch', lazy: page(() => import('./pages/student/BranchPage')) },
                 ],
               },
