@@ -39,6 +39,10 @@ export const routes = [
                 children: [
                   { path: 'student', lazy: page(() => import('./pages/student/DashboardPage')) },
                   { path: 'student/branch', lazy: page(() => import('./pages/student/BranchPage')) },
+                  {
+                    path: 'student/date-sheet',
+                    lazy: page(() => import('./pages/student/DateSheetPage')),
+                  },
                 ],
               },
             ],

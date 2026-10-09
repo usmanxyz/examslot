@@ -13,6 +13,11 @@ export function formatDate(value) {
   return `${pick(list, 'weekday')} ${pick(list, 'day')} ${pick(list, 'month')} ${pick(list, 'year')}`
 }
 
+export function formatDateShort(value) {
+  const list = parts(value, { day: '2-digit', month: 'short', year: 'numeric' })
+  return `${pick(list, 'day')} ${pick(list, 'month')} ${pick(list, 'year')}`
+}
+
 export function formatDateWithoutYear(value) {
   const list = parts(value, { weekday: 'short', day: '2-digit', month: 'short' })
   return `${pick(list, 'weekday')} ${pick(list, 'day')} ${pick(list, 'month')}`

@@ -155,7 +155,8 @@
     display: none !important;
   }
 
-  .print-only {
+  .print-only,
+  .print-show {
     display: block !important;
   }
 
