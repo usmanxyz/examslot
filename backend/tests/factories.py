@@ -6,6 +6,8 @@ from sqlalchemy.orm import Session
 from app.core.passwords import PasswordService
 from app.models.admin import Admin
 from app.models.branch import Branch
+from app.models.course import Course
+from app.models.course_assignment import CourseAssignment
 from app.models.student import Student
 
 STUDENT_PASSWORD = "a-long-student-password"
@@ -107,3 +109,29 @@ def create_branch(session: Session, index: int = 1, **overrides: object) -> Bran
     session.add(branch)
     session.commit()
     return branch
+
+
+def create_course(session: Session, index: int = 1, **overrides: object) -> Course:
+    values: dict = {
+        "code": f"CS-{2100 + index}",
+        "title": "Data Structures",
+        "credit_hours": 3,
+        "department": "Computer Science",
+    }
+    values.update(overrides)
+    course = Course(**values)
+    session.add(course)
+    session.commit()
+    return course
+
+
+def create_courses(
+    session: Session, count: int = 4, start: int = 1, **overrides: object
+) -> list[Course]:
+    return [create_course(session, index, **overrides) for index in range(start, start + count)]
+
+
+def assign_courses(session: Session, student: Student, courses: list[Course]) -> None:
+    for course in courses:
+        session.add(CourseAssignment(student_id=student.id, course_id=course.id))
+    session.commit()

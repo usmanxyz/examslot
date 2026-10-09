@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from app.api.deps import current_admin
-from app.api.v1.admin import account, branches
+from app.api.v1.admin import account, branches, courses
 from app.core.rate_limit import admin_write_limit
 
 router = APIRouter(
@@ -10,3 +10,4 @@ router = APIRouter(
 )
 router.include_router(account.router)
 router.include_router(branches.router)
+router.include_router(courses.router)
