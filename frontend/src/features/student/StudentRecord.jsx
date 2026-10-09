@@ -1,4 +1,3 @@
-import DefinitionList from '../../components/ui/DefinitionList'
 import { formatCnic, formatDate, formatPhone, formatScore, titleCase } from '../../lib/format'
 
 function groups(me) {
@@ -43,12 +42,24 @@ function groups(me) {
 
 export default function StudentRecord({ me }) {
   return (
-    <div className="grid grid-cols-1 gap-8 pt-4 lg:grid-cols-3">
+    <div className="grid grid-cols-1 items-start gap-4 pt-4 lg:grid-cols-3">
       {groups(me).map((group) => (
-        <div key={group.title} className="space-y-3">
-          <h3 className="text-[17px] leading-6 font-semibold text-ink">{group.title}</h3>
-          <DefinitionList items={group.items} />
-        </div>
+        <section key={group.title} className="overflow-hidden rounded-xl border border-line bg-surface">
+          <h3 className="border-b border-line bg-sunken px-4 py-2.5 text-[15px] leading-6 font-semibold text-ink">
+            {group.title}
+          </h3>
+          <dl className="divide-y divide-line">
+            {group.items.map((item) => (
+              <div
+                key={item.term}
+                className="grid grid-cols-1 gap-x-4 px-4 py-2.5 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] lg:grid-cols-1"
+              >
+                <dt className="text-sm leading-6 text-muted">{item.term}</dt>
+                <dd className="tabular text-[15px] leading-6 break-words text-ink">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
       ))}
     </div>
   )
