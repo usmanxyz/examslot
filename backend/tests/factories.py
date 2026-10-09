@@ -75,6 +75,25 @@ def create_admin(
     return admin
 
 
+def admin_headers(client, session: Session, passwords: PasswordService) -> dict[str, str]:
+    create_admin(session, passwords)
+    token = client.post(
+        "/api/v1/auth/admin/login",
+        json={"email": "office@example.com", "password": ADMIN_PASSWORD},
+    ).json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}
+
+
+def student_headers(
+    client, session: Session, passwords: PasswordService, student: Student
+) -> dict[str, str]:
+    token = client.post(
+        "/api/v1/auth/student/login",
+        json={"email": student.email, "password": STUDENT_PASSWORD},
+    ).json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}
+
+
 def create_branch(session: Session, index: int = 1, **overrides: object) -> Branch:
     values: dict = {
         "code": f"LHR{index}",
