@@ -1,7 +1,15 @@
 from fastapi import APIRouter, Depends
 
 from app.api.deps import current_admin
-from app.api.v1.admin import account, assignments, branches, courses, slots, students
+from app.api.v1.admin import (
+    account,
+    assignments,
+    branches,
+    courses,
+    requests,
+    slots,
+    students,
+)
 from app.core.rate_limit import admin_write_limit
 
 router = APIRouter(
@@ -14,3 +22,4 @@ router.include_router(courses.router)
 router.include_router(students.router)
 router.include_router(assignments.router)
 router.include_router(slots.router)
+router.include_router(requests.router)

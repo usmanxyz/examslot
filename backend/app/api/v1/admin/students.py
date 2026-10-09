@@ -4,6 +4,7 @@ from typing import Annotated
 from fastapi import APIRouter, Query, Response, status
 
 from app.api.deps import EmailGateDep, PasswordsDep, SessionDep, SettingsDep
+from app.schemas.change_request import RequestOut, StudentRequestListQuery
 from app.schemas.common import Page
 from app.schemas.planner import DateSheetOut
 from app.schemas.student import (
@@ -14,7 +15,7 @@ from app.schemas.student import (
     StudentListQuery,
     StudentUpdate,
 )
-from app.services import date_sheet_service, student_service
+from app.services import date_sheet_service, request_service, student_service
 
 router = APIRouter(prefix="/students", tags=["admin"])
 
@@ -90,3 +91,14 @@ def read_student_date_sheet(
 ) -> DateSheetOut:
     student_service.read_student(db, student_id)
     return DateSheetOut(**date_sheet_service.read_date_sheet(db, settings, student_id))
+
+
+@router.get("/{student_id}/requests", response_model=Page[RequestOut])
+def read_student_requests(
+    student_id: uuid.UUID,
+    query: Annotated[StudentRequestListQuery, Query()],
+    db: SessionDep,
+) -> Page[RequestOut]:
+    return Page[RequestOut](
+        **request_service.list_requests_for_student(db, student_id, query)
+    )
