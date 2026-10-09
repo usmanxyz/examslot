@@ -38,6 +38,7 @@ export const routes = [
             Component: AdminLayout,
             children: [
               { path: 'admin', lazy: page(() => import('./pages/admin/AdminDashboardPage')) },
+              { path: 'admin/students', lazy: page(() => import('./pages/admin/AdminStudentsPage')) },
             ],
           },
         ],
