@@ -22,15 +22,23 @@ export const routes = [
           { index: true, element: <Navigate to="/login" replace /> },
           {
             Component: RedirectIfSignedIn,
-            children: [{ path: 'login', lazy: page(() => import('./pages/public/LoginPage')) }],
+            children: [
+              { path: 'login', lazy: page(() => import('./pages/public/LoginPage')) },
+              { path: 'forgot-password', lazy: page(() => import('./pages/public/ForgotPasswordPage')) },
+            ],
           },
           { path: 'set-password', lazy: page(() => import('./pages/public/SetPasswordPage')) },
+          { path: 'about', lazy: page(() => import('./pages/public/AboutPage')) },
+          { path: 'contact', lazy: page(() => import('./pages/public/ContactPage')) },
+          { path: 'terms', lazy: page(() => import('./pages/public/TermsPage')) },
+          { path: 'privacy', lazy: page(() => import('./pages/public/PrivacyPage')) },
+          { path: 'disclaimer', lazy: page(() => import('./pages/public/DisclaimerPage')) },
           { path: '*', lazy: page(() => import('./pages/public/NotFoundPage')) },
         ],
       },
       {
         Component: RequireStudent,
-                children: [
+        children: [
           {
             Component: StudentLayout,
             children: [
@@ -45,6 +53,8 @@ export const routes = [
                   },
                 ],
               },
+              { path: 'student/help', lazy: page(() => import('./pages/student/HelpPage')) },
+              { path: 'student/account', lazy: page(() => import('./pages/student/AccountPage')) },
             ],
           },
         ],

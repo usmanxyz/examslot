@@ -73,18 +73,23 @@ export function StudentAuthProvider({ children }) {
     return () => controller.abort()
   }, [token, me, api])
 
-  const signIn = useCallback(async (email, password) => {
-    const anonymous = createApiClient({ baseUrl: BASE_URL, onSlowChange })
-    const result = await studentLogin(anonymous, { email, password })
+  const adoptSession = useCallback((result) => {
     const next = {
       token: result.access_token,
       expiresAt: new Date(Date.now() + result.expires_in * 1000).toISOString(),
     }
     writeStored(window.sessionStorage, STUDENT_SESSION_KEY, next)
+    setSession(next)
+    return next
+  }, [])
+
+  const signIn = useCallback(async (email, password) => {
+    const anonymous = createApiClient({ baseUrl: BASE_URL, onSlowChange })
+    const result = await studentLogin(anonymous, { email, password })
     setStatus('loading')
     setMe(null)
-    setSession(next)
-  }, [onSlowChange])
+    adoptSession(result)
+  }, [onSlowChange, adoptSession])
 
   const signOut = useCallback(async () => {
     try {
@@ -104,8 +109,8 @@ export function StudentAuthProvider({ children }) {
   }, [api])
 
   const value = useMemo(
-    () => ({ api, me, status, signIn, signOut, refreshMe }),
-    [api, me, status, signIn, signOut, refreshMe],
+    () => ({ api, me, status, signIn, signOut, refreshMe, adoptSession }),
+    [api, me, status, signIn, signOut, refreshMe, adoptSession],
   )
 
   return <StudentAuthContext.Provider value={value}>{children}</StudentAuthContext.Provider>
