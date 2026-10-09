@@ -93,8 +93,9 @@ export default function SlotsPage() {
       header: 'Time',
       cell: (row) => (
         <span className="tabular">
-          {formatClockTime(row.start_time)} to {formatClockTime(row.end_time)}
-          {row.end_time_set ? '' : ' (default)'}
+          {row.end_time_set
+            ? `${formatClockTime(row.start_time)} to ${formatClockTime(row.end_time)}`
+            : `${formatClockTime(row.start_time)}, default length`}
         </span>
       ),
     },

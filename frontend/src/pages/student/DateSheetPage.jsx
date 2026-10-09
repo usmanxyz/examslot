@@ -84,10 +84,7 @@ export default function DateSheetPage() {
             <Printer size={20} strokeWidth={1.75} aria-hidden="true" />
             Print
           </Button>
-          <Button variant="secondary" pending={pending} pendingLabel="Preparing" onClick={onDownload}>
-            <Download size={20} strokeWidth={1.75} aria-hidden="true" />
-            Download PDF
-          </Button>
+         
         </div>
       </div>
 

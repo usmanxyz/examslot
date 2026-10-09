@@ -34,6 +34,7 @@ const STATUSES = {
   active: { label: 'Active', tone: 'success', icon: Check },
   inactive: { label: 'Inactive', tone: 'neutral', icon: CircleSlash },
   incomplete: { label: 'Incomplete', tone: 'warning', icon: TriangleAlert },
+  assignment_incomplete: { label: 'Assignment incomplete', tone: 'warning', icon: TriangleAlert },
   complete: { label: 'Complete', tone: 'success', icon: CircleCheck },
   locked: { label: 'Locked', tone: 'neutral', icon: Lock },
   upcoming: { label: 'Upcoming', tone: 'primary', icon: CalendarClock },
