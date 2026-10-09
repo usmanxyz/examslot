@@ -18,7 +18,7 @@ export default function SiteFooter() {
               {link.label}
             </Link>
           ))}
-          <p className="ms-auto">Built by Usman Ali for Loopverse 3.0</p>
+          
         </div>
       </nav>
     </footer>
