@@ -311,7 +311,10 @@ def resend_setup_email(
 
 def lock_student(session: Session, student_id: uuid.UUID) -> Student:
     student = session.scalar(
-        select(Student).where(Student.id == student_id).with_for_update()
+        select(Student)
+        .where(Student.id == student_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
     )
     if student is None:
         raise NotFound("NOT_FOUND")

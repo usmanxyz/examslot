@@ -86,7 +86,12 @@ def read_slot(session: Session, settings: Settings, slot_id: uuid.UUID) -> dict:
 def update_slot(
     session: Session, settings: Settings, slot_id: uuid.UUID, data: SlotUpdate
 ) -> dict:
-    slot = session.scalar(select(ExamSlot).where(ExamSlot.id == slot_id).with_for_update())
+    slot = session.scalar(
+        select(ExamSlot)
+        .where(ExamSlot.id == slot_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
     if slot is None:
         raise NotFound("NOT_FOUND")
     changes = data.model_dump(exclude_unset=True)
