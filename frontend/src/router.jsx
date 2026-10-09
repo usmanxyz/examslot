@@ -24,6 +24,7 @@ export const routes = [
             Component: RedirectIfSignedIn,
             children: [{ path: 'login', lazy: page(() => import('./pages/public/LoginPage')) }],
           },
+          { path: 'set-password', lazy: page(() => import('./pages/public/SetPasswordPage')) },
           { path: '*', lazy: page(() => import('./pages/public/NotFoundPage')) },
         ],
       },
