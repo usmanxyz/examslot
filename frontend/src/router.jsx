@@ -30,7 +30,19 @@ export const routes = [
       },
       {
         Component: RequireStudent,
-        children: [{ Component: StudentLayout, children: [{ Component: StudentFlowGate, children: [] }] }],
+                children: [
+          {
+            Component: StudentLayout,
+            children: [
+              {
+                Component: StudentFlowGate,
+                children: [
+                  { path: 'student/branch', lazy: page(() => import('./pages/student/BranchPage')) },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },
