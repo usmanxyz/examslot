@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root {
+  --canvas: #F7F6F2;
+  --surface: #FFFFFF;
+  --sunken: #EFEDE6;
+  --text: #17233A;
+  --muted: #556070;
+  --border: #E3E0D8;
+  --control: #7E8796;
+  --primary: #0F766E;
+  --primary-hover: #0B5F59;
+  --on-primary: #FFFFFF;
+  --primary-soft: #E3F2EF;
+  --danger: #A1232E;
+  --danger-soft: #FCEBEC;
+  --on-danger: #FFFFFF;
+  --warning: #8A5300;
+  --warning-soft: #FFF4DB;
+  --success: #0B6B3A;
+  --success-soft: #E5F4EC;
+  --clash: #9A3412;
+  --clash-soft: #FFF1E8;
+  --shadow-overlay: 0 12px 32px rgb(23 35 58 / 0.18);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --canvas: #0F1828;
+  --surface: #17233A;
+  --sunken: #121D30;
+  --text: #ECE9E1;
+  --muted: #A3ACBA;
+  --border: #26324A;
+  --control: #7D8AA3;
+  --primary: #5EC4B6;
+  --primary-hover: #7BD3C7;
+  --on-primary: #0F1828;
+  --primary-soft: #173D3D;
+  --danger: #F4A3A8;
+  --danger-soft: #3A1C24;
+  --on-danger: #0F1828;
+  --warning: #F2C46D;
+  --warning-soft: #2B2416;
+  --success: #86D7AE;
+  --success-soft: #132E26;
+  --clash: #F5A97F;
+  --clash-soft: #3A2216;
+  --shadow-overlay: 0 12px 32px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+  --color-control: var(--control);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-on-danger: var(--on-danger);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-clash: var(--clash);
+  --color-clash-soft: var(--clash-soft);
+  --font-serif: "Source Serif 4 Variable", Georgia, serif;
+  --font-sans: "Public Sans Variable", system-ui, sans-serif;
+  --shadow-overlay: var(--shadow-overlay);
+}
+
+@layer base {
+  body {
+    @apply bg-canvas text-ink font-sans;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
